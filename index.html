@@ -1,0 +1,1532 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>YourSystem.Agency — Websites & Systems Built for Business</title>
+  <meta name="description" content="See exactly what you'll get before you pay a thing. Websites and systems built for your business." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Syne:wght@400;500;600;700;800&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:           #090806;
+      --bg-raised:    #111009;
+      --bg-card:      #161410;
+      --border:       #282318;
+      --border-mid:   #352e20;
+      --border-light: #443c2a;
+      --text:         #EDE8DF;
+      --text-muted:   #7D7264;
+      --text-subtle:  #4A4336;
+      --gold:         #C49A4A;
+      --gold-light:   #DCAF5E;
+      --gold-dim:     rgba(196,154,74,0.12);
+      --gold-border:  rgba(196,154,74,0.3);
+      --font-display: 'Cormorant Garamond', Georgia, serif;
+      --font-ui:      'Syne', sans-serif;
+      --font-mono:    'Space Mono', monospace;
+      --max:          1240px;
+      --gutter:       clamp(1.5rem, 5vw, 4rem);
+      --section-pad:  clamp(5rem, 10vw, 9rem);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font-ui);
+      font-size: 16px;
+      line-height: 1.6;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 9999;
+      opacity: 0.04;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)'/%3E%3C/svg%3E");
+    }
+
+    /* ─── NAV ────────────────────────────────────────────── */
+    nav {
+      position: fixed;
+      inset: 0 0 auto;
+      z-index: 200;
+      padding: 1.375rem var(--gutter);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 2rem;
+      transition: background 0.4s, border-color 0.4s;
+      border-bottom: 1px solid transparent;
+    }
+    nav.past {
+      background: rgba(9,8,6,0.92);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-color: var(--border);
+    }
+    .nav-logo {
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      letter-spacing: 0.06em;
+      color: var(--gold);
+      text-decoration: none;
+      white-space: nowrap;
+    }
+    .nav-logo span { color: var(--text-muted); }
+    .nav-center {
+      display: flex;
+      gap: 2.25rem;
+      list-style: none;
+    }
+    .nav-center a {
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .nav-center a:hover { color: var(--text); }
+    .nav-cta {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      letter-spacing: 0.06em;
+      color: var(--gold);
+      text-decoration: none;
+      border: 1px solid var(--gold-border);
+      padding: 0.55rem 1.1rem;
+      white-space: nowrap;
+      transition: background 0.2s, border-color 0.2s;
+    }
+    .nav-cta:hover { background: var(--gold-dim); border-color: var(--gold); }
+    .nav-burger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      background: none;
+      border: none;
+      padding: 4px;
+    }
+    .nav-burger span {
+      display: block;
+      width: 22px;
+      height: 1px;
+      background: var(--text-muted);
+      transition: all 0.3s;
+    }
+
+    /* ─── LANG TOGGLE ────────────────────────────────────── */
+    .lang-toggle {
+      display: flex;
+      align-items: center;
+      gap: 0;
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.1em;
+      border: 1px solid var(--border-mid);
+      overflow: hidden;
+    }
+    .lang-toggle button {
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0.4rem 0.65rem;
+      font-family: inherit;
+      font-size: inherit;
+      letter-spacing: inherit;
+      color: var(--text-subtle);
+      transition: color 0.2s, background 0.2s;
+      line-height: 1;
+    }
+    .lang-toggle button.active {
+      color: var(--gold);
+      background: var(--gold-dim);
+    }
+    .lang-toggle button:not(.active):hover { color: var(--text-muted); }
+    .lang-toggle .lang-sep {
+      color: var(--border-mid);
+      font-size: 0.55rem;
+      pointer-events: none;
+      line-height: 1;
+    }
+    .mobile-lang-toggle {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      letter-spacing: 0.12em;
+      margin-top: 1rem;
+    }
+    .mobile-lang-toggle button {
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-family: inherit;
+      font-size: inherit;
+      letter-spacing: inherit;
+      color: var(--text-subtle);
+      transition: color 0.2s;
+      padding: 0;
+    }
+    .mobile-lang-toggle button.active { color: var(--gold); }
+    .mobile-lang-toggle .lang-sep { color: var(--border-mid); }
+
+    /* ─── HERO ───────────────────────────────────────────── */
+    .hero {
+      padding-top: 10rem;
+      padding-left: var(--gutter);
+      padding-right: var(--gutter);
+      padding-bottom: 0;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(var(--border) 1px, transparent 1px),
+        linear-gradient(90deg, var(--border) 1px, transparent 1px);
+      background-size: 72px 72px;
+      opacity: 0.4;
+      mask-image: radial-gradient(ellipse 80% 60% at 50% 20%, black 10%, transparent 75%);
+      -webkit-mask-image: radial-gradient(ellipse 80% 60% at 50% 20%, black 10%, transparent 75%);
+    }
+    .hero-glow {
+      position: absolute;
+      top: 0; left: 50%;
+      transform: translateX(-50%);
+      width: 80%;
+      height: 400px;
+      background: radial-gradient(ellipse at top, rgba(196,154,74,0.06) 0%, transparent 65%);
+      pointer-events: none;
+    }
+    .hero-text {
+      position: relative;
+      max-width: var(--max);
+      margin: 0 auto;
+      text-align: center;
+      padding-bottom: clamp(3rem, 6vw, 5rem);
+    }
+    .hero-label {
+      font-family: var(--font-mono);
+      font-size: 0.62rem;
+      letter-spacing: 0.28em;
+      color: var(--gold);
+      text-transform: uppercase;
+      margin-bottom: 2rem;
+      display: inline-block;
+      opacity: 0;
+      transform: translateY(12px);
+      animation: fadeUp 0.6s 0.1s cubic-bezier(0.16,1,0.3,1) forwards;
+    }
+    .hero-h1 {
+      font-family: var(--font-display);
+      font-size: clamp(2.8rem, 6.5vw, 6.5rem);
+      font-weight: 300;
+      line-height: 1.0;
+      letter-spacing: -0.02em;
+      margin-bottom: 1.5rem;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeUp 0.8s 0.25s cubic-bezier(0.16,1,0.3,1) forwards;
+    }
+    .hero-h1 em { font-style: italic; color: var(--gold); }
+    .hero-sub {
+      color: var(--text-muted);
+      font-size: clamp(0.95rem, 1.5vw, 1.1rem);
+      margin-bottom: 2.5rem;
+      opacity: 0;
+      transform: translateY(16px);
+      animation: fadeUp 0.7s 0.45s cubic-bezier(0.16,1,0.3,1) forwards;
+    }
+    .hero-cta-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+      opacity: 0;
+      transform: translateY(14px);
+      animation: fadeUp 0.7s 0.6s cubic-bezier(0.16,1,0.3,1) forwards;
+    }
+
+    /* ─── BUTTONS ────────────────────────────────────────── */
+    .btn-fill {
+      background: var(--gold);
+      color: var(--bg);
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.07em;
+      padding: 0.9rem 2.25rem;
+      text-decoration: none;
+      display: inline-block;
+      transition: background 0.2s, transform 0.2s;
+    }
+    .btn-fill:hover { background: var(--gold-light); transform: translateY(-2px); }
+    .btn-ghost {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      letter-spacing: 0.07em;
+      color: var(--text-muted);
+      text-decoration: none;
+      border: 1px solid var(--border-mid);
+      padding: 0.9rem 2.25rem;
+      display: inline-block;
+      transition: color 0.2s, border-color 0.2s;
+    }
+    .btn-ghost:hover { color: var(--text); border-color: var(--border-light); }
+
+    /* ─── SCORPIO HERO TRIPTYCH ──────────────────────────── */
+    .hero-scorpio-wrap {
+      position: relative;
+      max-width: var(--max);
+      margin: 0 auto;
+      opacity: 0;
+      transform: translateY(40px);
+      animation: fadeUp 1s 0.85s cubic-bezier(0.16,1,0.3,1) forwards;
+      padding: 0 0.5rem;
+    }
+    .hero-triptych {
+      display: grid;
+      grid-template-columns: 1fr 1.25fr 1fr;
+      align-items: end;
+      gap: 0.75rem;
+    }
+    .triptych-main {
+      position: relative;
+      z-index: 2;
+      transform: translateY(-1.75rem);
+      border: 1px solid var(--gold-border);
+      border-bottom: none;
+      overflow: hidden;
+      box-shadow: 0 0 40px rgba(196,154,74,0.1), 0 0 80px rgba(196,154,74,0.04);
+    }
+    .triptych-main::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, transparent 5%, var(--gold) 30%, var(--gold-light) 50%, var(--gold) 70%, transparent 95%);
+      z-index: 3;
+    }
+    .triptych-side {
+      position: relative;
+      border: 1px solid var(--border);
+      border-bottom: none;
+      overflow: hidden;
+      opacity: 0.72;
+      transition: opacity 0.3s;
+    }
+    .triptych-side:hover { opacity: 1; }
+    .triptych-left  { transform: perspective(900px) rotateY(6deg);  transform-origin: right bottom; }
+    .triptych-right { transform: perspective(900px) rotateY(-6deg); transform-origin: left bottom;  }
+    .triptych-main img,
+    .triptych-side  img {
+      width: 100%;
+      display: block;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 0.4; transform: scale(1); }
+      50% { opacity: 1; transform: scale(1.3); }
+    }
+
+    /* ─── SECTION COMMON ─────────────────────────────────── */
+    .section { padding: var(--section-pad) var(--gutter); }
+    .section-inner { max-width: var(--max); margin: 0 auto; }
+    .section-label {
+      font-family: var(--font-mono);
+      font-size: 0.62rem;
+      letter-spacing: 0.28em;
+      color: var(--gold);
+      text-transform: uppercase;
+      margin-bottom: 1.25rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    .section-label::after {
+      content: '';
+      display: block;
+      width: 36px;
+      height: 1px;
+      background: var(--gold-border);
+    }
+    .section-title {
+      font-family: var(--font-display);
+      font-size: clamp(2.25rem, 4.5vw, 4rem);
+      font-weight: 300;
+      line-height: 1.05;
+      letter-spacing: -0.015em;
+    }
+    .section-title em { font-style: italic; color: var(--gold); }
+
+    /* ─── PORTFOLIO ──────────────────────────────────────── */
+    #work { border-top: 1px solid var(--border); }
+    .work-head { margin-bottom: clamp(2.5rem, 5vw, 4rem); }
+
+    /* ─── PROJECT BUNDLES ────────────────────────────────── */
+    .project-bundle {
+      border: 1px solid var(--border);
+      overflow: hidden;
+    }
+    .bundle-header {
+      padding: 1.25rem 2rem;
+      background: var(--bg-raised);
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      gap: 1.25rem;
+      flex-wrap: wrap;
+    }
+    .bundle-client {
+      font-family: var(--font-display);
+      font-size: 1.4rem;
+      font-weight: 400;
+      color: var(--text);
+      white-space: nowrap;
+    }
+    .bundle-tag-row {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+    .bundle-tag {
+      font-family: var(--font-mono);
+      font-size: 0.52rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--text-subtle);
+      border: 1px solid var(--border);
+      padding: 0.2rem 0.55rem;
+    }
+    .bundle-ext-link {
+      margin-left: auto;
+      font-family: var(--font-mono);
+      font-size: 0.6rem;
+      letter-spacing: 0.08em;
+      color: var(--gold);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+      transition: color 0.2s;
+      white-space: nowrap;
+    }
+    .bundle-ext-link:hover { color: var(--gold-light); }
+    .bundle-ext-link .arrow { transition: transform 0.2s; }
+    .bundle-ext-link:hover .arrow { transform: translateX(3px); }
+
+    /* inner grid inside a bundle */
+    .bundle-grid-2 {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1px;
+      background: var(--border);
+    }
+    .bundle-grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: var(--border);
+      border-top: 1px solid var(--border);
+    }
+    .bundle-grid-2-top {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1px;
+      background: var(--border);
+    }
+    /* featured inside bundle: image left, text right */
+    .bundle-featured {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      background: var(--bg);
+      transition: background 0.3s;
+    }
+    .bundle-featured:hover { background: var(--bg-card); }
+    .bundle-featured .feat-visual {
+      overflow: hidden;
+      min-height: 260px;
+      position: relative;
+    }
+    .bundle-featured .feat-visual img {
+      width: 100%;
+      display: block;
+      object-fit: cover;
+      object-position: top center;
+      transition: transform 0.6s cubic-bezier(0.16,1,0.3,1);
+    }
+    .bundle-featured:hover .feat-visual img { transform: scale(1.03); }
+    .bundle-featured .feat-body {
+      padding: 2.5rem 2.25rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 1rem;
+      border-left: 1px solid var(--border);
+    }
+    .feat-tag {
+      font-family: var(--font-mono);
+      font-size: 0.55rem;
+      letter-spacing: 0.28em;
+      color: var(--gold);
+      text-transform: uppercase;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .feat-tag::before {
+      content: '';
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: var(--gold);
+      animation: pulse 2s ease-in-out infinite;
+    }
+    .feat-title {
+      font-family: var(--font-display);
+      font-size: clamp(1.8rem, 3vw, 2.75rem);
+      font-weight: 300;
+      line-height: 1.05;
+      color: var(--text);
+    }
+    .feat-desc {
+      color: var(--text-muted);
+      font-size: 0.875rem;
+      line-height: 1.7;
+    }
+    .feat-link {
+      margin-top: 0.5rem;
+      font-family: var(--font-mono);
+      font-size: 0.64rem;
+      letter-spacing: 0.1em;
+      color: var(--gold);
+      text-decoration: none;
+      border: 1px solid var(--gold-border);
+      padding: 0.6rem 1.4rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      width: fit-content;
+      transition: background 0.2s, border-color 0.2s, transform 0.2s;
+    }
+    .feat-link:hover { background: var(--gold-dim); border-color: var(--gold); transform: translateY(-2px); }
+    .feat-link .arrow { transition: transform 0.2s; }
+    .feat-link:hover .arrow { transform: translateX(4px); }
+
+    /* spacing between bundles */
+    .bundle-gap {
+      height: clamp(2.5rem, 5vw, 4rem);
+    }
+
+    /* Regular portfolio cards */
+    .portfolio-card {
+      background: var(--bg);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      transition: background 0.3s;
+    }
+    .portfolio-card:hover { background: var(--bg-card); }
+    .portfolio-card-img-wrap {
+      overflow: hidden;
+      border-bottom: 1px solid var(--border);
+      background: #0f0d09;
+      flex-shrink: 0;
+      position: relative;
+    }
+    /* Browser chrome mockup */
+    .portfolio-card-img-wrap::before {
+      content: '';
+      display: block;
+      height: 34px;
+      background-color: #161410;
+      background-image:
+        radial-gradient(circle 4px at 14px 17px, #ff5f57 100%, transparent 100%),
+        radial-gradient(circle 4px at 26px 17px, #febc2e 100%, transparent 100%),
+        radial-gradient(circle 4px at 38px 17px, #28c840 100%, transparent 100%),
+        linear-gradient(var(--bg-card) 0%, var(--bg-card) 100%);
+      background-size: auto, auto, auto, calc(100% - 72px) 18px;
+      background-position: 0 0, 0 0, 0 0, 58px 8px;
+      background-repeat: no-repeat;
+      border-bottom: 1px solid var(--border);
+      flex-shrink: 0;
+    }
+    /* Screely images already have browser frame — suppress double chrome */
+    .portfolio-card-img-wrap.no-chrome::before { display: none; }
+    .portfolio-card-img-wrap.no-chrome::after  { top: 0; height: 100%; }
+    /* Cover scrollbar strip in screenshots */
+    .portfolio-card-img-wrap::after {
+      content: '';
+      position: absolute;
+      top: 34px;
+      right: 0;
+      width: 18px;
+      height: calc(100% - 34px);
+      background: #0f0d09;
+      pointer-events: none;
+      z-index: 1;
+    }
+    .portfolio-card-img-wrap img {
+      width: 100%;
+      display: block;
+      transition: transform 0.6s cubic-bezier(0.16,1,0.3,1);
+    }
+    .portfolio-card:hover .portfolio-card-img-wrap img { transform: scale(1.03); }
+    .portfolio-card-body {
+      padding: 1.5rem 1.75rem 1.75rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      flex: 1;
+    }
+    .pc-meta {
+      font-family: var(--font-mono);
+      font-size: 0.56rem;
+      letter-spacing: 0.2em;
+      color: var(--gold);
+      text-transform: uppercase;
+    }
+    .pc-name {
+      font-family: var(--font-display);
+      font-size: clamp(1.35rem, 2vw, 1.75rem);
+      font-weight: 400;
+      line-height: 1.1;
+      color: var(--text);
+    }
+    .pc-desc {
+      color: var(--text-muted);
+      font-size: 0.825rem;
+      line-height: 1.65;
+      flex: 1;
+    }
+    .pc-link {
+      margin-top: 1rem;
+      font-family: var(--font-mono);
+      font-size: 0.6rem;
+      letter-spacing: 0.1em;
+      color: var(--text-subtle);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      transition: color 0.2s;
+      width: fit-content;
+    }
+    .pc-link:hover { color: var(--gold); }
+    .pc-link .arrow { transition: transform 0.2s; }
+    .pc-link:hover .arrow { transform: translateX(3px); }
+    .pc-link.private { cursor: default; pointer-events: none; }
+
+    /* standalone 2-col grid for websites */
+    .portfolio-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1px;
+      background: var(--border);
+    }
+
+    /* ─── SEE IT FIRST ───────────────────────────────────── */
+    #preview { border-top: 1px solid var(--border); }
+    .preview-card {
+      background: var(--bg-raised);
+      border: 1px solid var(--border-mid);
+      padding: clamp(2.5rem, 6vw, 5rem) clamp(2rem, 5vw, 4rem);
+      position: relative;
+      overflow: hidden;
+    }
+    .preview-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--gold), rgba(196,154,74,0.2), transparent);
+    }
+    .preview-card-inner { max-width: var(--max); margin: 0 auto; }
+    .preview-headline {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 4vw, 3.75rem);
+      font-weight: 300;
+      line-height: 1.05;
+      letter-spacing: -0.015em;
+      margin-bottom: clamp(2.5rem, 5vw, 4rem);
+      max-width: 700px;
+    }
+    .preview-headline em { font-style: italic; color: var(--gold); }
+    .steps-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: var(--border);
+    }
+    .step-card {
+      background: var(--bg-raised);
+      padding: 2rem 1.75rem 2.25rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+    .step-num { font-family: var(--font-mono); font-size: 0.6rem; letter-spacing: 0.2em; color: var(--gold); }
+    .step-title { font-family: var(--font-display); font-size: 1.35rem; font-weight: 400; line-height: 1.2; }
+    .step-desc { font-size: 0.85rem; color: var(--text-muted); line-height: 1.7; }
+
+    /* ─── SERVICES ───────────────────────────────────────── */
+    #services { border-top: 1px solid var(--border); }
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: var(--border);
+      margin-top: clamp(2.5rem, 5vw, 4rem);
+    }
+    .svc-card {
+      background: var(--bg);
+      padding: 2.5rem 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      position: relative;
+      overflow: hidden;
+      transition: background 0.3s;
+    }
+    .svc-card::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--gold), transparent);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.4s cubic-bezier(0.16,1,0.3,1);
+    }
+    .svc-card:hover { background: var(--bg-card); }
+    .svc-card:hover::after { transform: scaleX(1); }
+    .svc-icon { width: 40px; height: 40px; flex-shrink: 0; }
+    .svc-name { font-family: var(--font-display); font-size: 1.6rem; font-weight: 400; line-height: 1.1; }
+    .svc-desc { font-size: 0.85rem; color: var(--text-muted); line-height: 1.7; }
+
+    /* ─── CONTACT ────────────────────────────────────────── */
+    #contact { border-top: 1px solid var(--border); text-align: center; }
+    .contact-inner {
+      max-width: 640px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1.5rem;
+    }
+    .contact-ready {
+      font-family: var(--font-display);
+      font-size: clamp(3.5rem, 8vw, 7rem);
+      font-weight: 300;
+      line-height: 0.95;
+      letter-spacing: -0.03em;
+    }
+    .contact-ready em { font-style: italic; color: var(--gold); }
+    .contact-email {
+      font-family: var(--font-display);
+      font-size: clamp(1rem, 2vw, 1.4rem);
+      font-style: italic;
+      color: var(--gold);
+      text-decoration: none;
+      border-bottom: 1px solid var(--gold-border);
+      padding-bottom: 0.15rem;
+      transition: color 0.2s, border-color 0.2s;
+    }
+    .contact-email:hover { color: var(--gold-light); border-color: var(--gold); }
+    .contact-cta-row {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .cta-or { font-family: var(--font-mono); font-size: 0.58rem; letter-spacing: 0.2em; color: var(--text-subtle); text-transform: uppercase; }
+
+    /* ─── FOOTER ─────────────────────────────────────────── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 2rem var(--gutter);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+    .foot-logo { font-family: var(--font-mono); font-size: 0.72rem; color: var(--text-muted); letter-spacing: 0.06em; }
+    .foot-links { display: flex; gap: 1.75rem; list-style: none; }
+    .foot-links a {
+      font-family: var(--font-mono);
+      font-size: 0.62rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-subtle);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .foot-links a:hover { color: var(--text-muted); }
+    .foot-copy { font-family: var(--font-mono); font-size: 0.62rem; letter-spacing: 0.06em; color: var(--text-subtle); }
+
+    /* ─── ZOOM LENS ──────────────────────────────────────── */
+    .zoom-lens {
+      position: absolute;
+      width: 320px;
+      height: 320px;
+      border-radius: 50%;
+      border: 1.5px solid var(--gold-border);
+      box-shadow:
+        0 0 0 1px rgba(196,154,74,0.12),
+        0 16px 48px rgba(0,0,0,0.75),
+        inset 0 1px 0 rgba(255,255,255,0.04);
+      pointer-events: none;
+      z-index: 20;
+      display: none;
+      transform: translate(-50%, -50%);
+      background-repeat: no-repeat;
+      overflow: hidden;
+    }
+    .portfolio-card-img-wrap:hover,
+    .bundle-featured .feat-visual:hover { cursor: crosshair; }
+
+    /* ─── ANIMATIONS ─────────────────────────────────────── */
+    @keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.75s cubic-bezier(0.16,1,0.3,1), transform 0.75s cubic-bezier(0.16,1,0.3,1);
+    }
+    .reveal.in { opacity: 1; transform: none; }
+    .reveal-d1 { transition-delay: 0.1s; }
+    .reveal-d2 { transition-delay: 0.2s; }
+    .reveal-d3 { transition-delay: 0.3s; }
+
+    /* ─── MOBILE NAV ─────────────────────────────────────── */
+    .mobile-nav {
+      position: fixed;
+      inset: 0;
+      background: rgba(9,8,6,0.97);
+      z-index: 190;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 2.5rem;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s;
+    }
+    .mobile-nav.open { opacity: 1; pointer-events: auto; }
+    .mobile-nav a {
+      font-family: var(--font-display);
+      font-size: 2.5rem;
+      font-weight: 300;
+      color: var(--text);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .mobile-nav a:hover { color: var(--gold); }
+
+    /* ─── RESPONSIVE ─────────────────────────────────────── */
+    @media (max-width: 960px) {
+      .nav-center { display: none; }
+      .nav-burger { display: flex; }
+      .nav-cta    { display: none; }
+
+      .bundle-featured { grid-template-columns: 1fr; }
+      .bundle-featured .feat-body { border-left: none; border-top: 1px solid var(--border); }
+      .bundle-grid-2 { grid-template-columns: 1fr; }
+      .bundle-grid-3 { grid-template-columns: 1fr; }
+      .portfolio-grid { grid-template-columns: 1fr; }
+      .steps-row { grid-template-columns: 1fr; }
+      .services-grid { grid-template-columns: 1fr; }
+      .bundle-ext-link { display: none; }
+
+      /* Hero triptych: all 3 side by side on mobile, no 3D rotation */
+      .hero-triptych { grid-template-columns: 1fr 1.15fr 1fr; gap: 0.35rem; }
+      .triptych-left  { transform: none; opacity: 0.85; }
+      .triptych-right { transform: none; opacity: 0.85; }
+      .triptych-main  { transform: none; }
+    }
+    @media (max-width: 600px) {
+      footer { flex-direction: column; gap: 1.25rem; text-align: center; }
+      .foot-links { justify-content: center; }
+      .hero-h1 { font-size: clamp(2.4rem, 11vw, 3.5rem); }
+      .hero-scorpio-wrap { padding: 0; }
+      .triptych-main { max-width: 100%; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="mobile-nav" id="mobileNav" role="dialog" aria-modal="true" aria-label="Navigation">
+    <a href="#work"     class="mobile-link" data-i18n="nav-work">Work</a>
+    <a href="#preview"  class="mobile-link" data-i18n="nav-how">How It Works</a>
+    <a href="#services" class="mobile-link" data-i18n="nav-services">Services</a>
+    <a href="#contact"  class="mobile-link" data-i18n="nav-contact">Contact</a>
+    <div class="mobile-lang-toggle" role="group" aria-label="Language">
+      <button id="mbtn-en" class="active" onclick="setLang('en')">EN</button>
+      <span class="lang-sep">·</span>
+      <button id="mbtn-nl" onclick="setLang('nl')">NL</button>
+    </div>
+  </div>
+
+  <nav id="nav" role="navigation" aria-label="Main">
+    <a href="#" class="nav-logo">YS<span>.</span>AGENCY</a>
+    <ul class="nav-center" role="list">
+      <li><a href="#work" data-i18n="nav-work">Work</a></li>
+      <li><a href="#preview" data-i18n="nav-how">How It Works</a></li>
+      <li><a href="#services" data-i18n="nav-services">Services</a></li>
+      <li><a href="#contact" data-i18n="nav-contact">Contact</a></li>
+    </ul>
+    <a href="#contact" class="nav-cta" data-i18n="nav-cta">Get in Touch →</a>
+    <div class="lang-toggle" role="group" aria-label="Language">
+      <button id="btn-en" class="active" onclick="setLang('en')">EN</button>
+      <span class="lang-sep">·</span>
+      <button id="btn-nl" onclick="setLang('nl')">NL</button>
+    </div>
+    <button class="nav-burger" id="burger" aria-label="Open navigation" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <!-- ─── HERO ──────────────────────────────────────────── -->
+  <header class="hero" aria-label="Hero">
+    <div class="hero-bg" aria-hidden="true"></div>
+    <div class="hero-glow" aria-hidden="true"></div>
+
+    <div class="hero-text">
+      <p class="hero-label">YourSystem.Agency</p>
+      <h1 class="hero-h1" data-i18n="hero-h1">
+        See exactly what you'll get —<br><em>before you pay a thing.</em>
+      </h1>
+      <p class="hero-sub" data-i18n="hero-sub">Websites and systems built for your business.</p>
+      <div class="hero-cta-row">
+        <a href="#work" class="btn-fill" data-i18n="hero-cta">SEE OUR WORK</a>
+        <a href="#contact" class="btn-ghost">GET IN TOUCH</a>
+      </div>
+    </div>
+
+    <!-- Scorpio triptych in hero -->
+    <div class="hero-scorpio-wrap" aria-hidden="true">
+      <div class="hero-triptych">
+        <div class="triptych-side triptych-left">
+          <img src="images/scorpio-dashboard.png" alt="Scorpio — fleet dashboard" />
+        </div>
+        <div class="triptych-main">
+          <img src="images/scorpio-hero.png" alt="Scorpio — homepage" />
+        </div>
+        <div class="triptych-side triptych-right">
+          <img src="images/scorpio-fleet.png" alt="Scorpio — fleet page" />
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ─── PORTFOLIO ──────────────────────────────────────── -->
+  <section id="work" class="section">
+    <div class="section-inner">
+      <div class="work-head">
+        <div class="section-label reveal" data-i18n="nav-work">Work</div>
+        <h2 class="section-title reveal" data-i18n="work-title">Real projects,<br><em>real results.</em></h2>
+      </div>
+
+      <!-- ══ SCORPIO BUNDLE ════════════════════════════════ -->
+      <div class="project-bundle reveal">
+        <div class="bundle-header">
+          <span class="bundle-client">Scorpio Elite Car Rental</span>
+          <div class="bundle-tag-row">
+            <span class="bundle-tag">Website</span>
+            <span class="bundle-tag">Dashboard</span>
+            <span class="bundle-tag">Dubai, UAE</span>
+          </div>
+          <a href="https://scorpio-carrental.ae" target="_blank" rel="noopener" class="bundle-ext-link">
+            scorpio-carrental.ae <span class="arrow">→</span>
+          </a>
+        </div>
+
+        <!-- featured: homepage screenshot + description -->
+        <div class="bundle-featured">
+          <div class="feat-visual">
+            <img src="images/scorpio-hero.png" alt="Scorpio — homepage" />
+          </div>
+          <div class="feat-body">
+            <div class="feat-tag">Live · Website · Dubai, UAE</div>
+            <h3 class="feat-title">Scorpio Elite Car Rental</h3>
+            <p class="feat-desc" data-i18n="scorpio-feat-desc">Luxury car rental platform based in Dubai, UAE — full website with fleet overview, booking flow, and integrated management dashboard.</p>
+            <a href="https://scorpio-carrental.ae" target="_blank" rel="noopener" class="feat-link">
+              scorpio-carrental.ae <span class="arrow">→</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- fleet + dashboard below -->
+        <div class="bundle-grid-2">
+          <article class="portfolio-card">
+            <div class="portfolio-card-img-wrap no-chrome">
+              <img src="images/scorpio-fleet.png" alt="Scorpio — fleet page" loading="lazy" />
+            </div>
+            <div class="portfolio-card-body">
+              <div class="pc-meta" data-i18n="scorpio-fleet-meta">Website · Fleet Overview</div>
+              <h3 class="pc-name" data-i18n="scorpio-fleet-name">Scorpio — Fleet</h3>
+              <p class="pc-desc" data-i18n="scorpio-fleet-desc">Full fleet overview — filters, daily rates, availability, and direct booking option.</p>
+            </div>
+          </article>
+          <article class="portfolio-card">
+            <div class="portfolio-card-img-wrap no-chrome">
+              <img src="images/scorpio-dashboard.png" alt="Scorpio — fleet management dashboard" loading="lazy" />
+            </div>
+            <div class="portfolio-card-body">
+              <div class="pc-meta" data-i18n="scorpio-dash-meta">Custom System · Dashboard</div>
+              <h3 class="pc-name" data-i18n="scorpio-dash-name">Scorpio — Management Panel</h3>
+              <p class="pc-desc" data-i18n="scorpio-dash-desc">Custom dashboard for fleet management, availability, pricing, and bookings — fully integrated with the website.</p>
+              <span class="pc-link private" data-i18n="demo-request">Demo available on request</span>
+            </div>
+          </article>
+        </div>
+      </div>
+
+      <div class="bundle-gap"></div>
+
+      <!-- ══ ARKSTAAL BUNDLE ═══════════════════════════════ -->
+      <div class="project-bundle reveal">
+        <div class="bundle-header">
+          <span class="bundle-client">Arkstaal B.V.</span>
+          <div class="bundle-tag-row">
+            <span class="bundle-tag">Website</span>
+            <span class="bundle-tag">Dashboard</span>
+            <span class="bundle-tag">Client Portal</span>
+            <span class="bundle-tag">Inventory</span>
+            <span class="bundle-tag">NL</span>
+          </div>
+          <a href="https://arkstaal.nl" target="_blank" rel="noopener" class="bundle-ext-link">
+            arkstaal.nl <span class="arrow">→</span>
+          </a>
+        </div>
+
+        <!-- featured: website screenshot + description -->
+        <div class="bundle-featured">
+          <div class="feat-visual">
+            <img src="images/arkstaal-website.png" alt="Arkstaal.nl website" />
+          </div>
+          <div class="feat-body">
+            <div class="feat-tag">Live · Website · B2B · NL/EN</div>
+            <h3 class="feat-title">Arkstaal B.V.</h3>
+            <p class="feat-desc" data-i18n="arkstaal-feat-desc">Public website for a Dutch stainless steel & aluminium supplier — full product catalogue, quote request, and bilingual. Includes custom systems for the owner and clients.</p>
+            <a href="https://arkstaal.nl" target="_blank" rel="noopener" class="feat-link">
+              arkstaal.nl <span class="arrow">→</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- 3 system cards below -->
+        <div class="bundle-grid-3">
+          <article class="portfolio-card">
+            <div class="portfolio-card-img-wrap">
+              <img src="images/arkstaal-dashboard.png" alt="Arkstaal owner panel" loading="lazy" />
+            </div>
+            <div class="portfolio-card-body">
+              <div class="pc-meta">Custom System · Dashboard</div>
+              <h3 class="pc-name" data-i18n="arkstaal-owner-name">Owner Panel</h3>
+              <p class="pc-desc" data-i18n="arkstaal-owner-desc">Custom dashboard for quotes, orders, and client management — replacing spreadsheets entirely.</p>
+              <span class="pc-link private" data-i18n="demo-request">Demo available on request</span>
+            </div>
+          </article>
+          <article class="portfolio-card">
+            <div class="portfolio-card-img-wrap">
+              <img src="images/arkstaal-voorraad.png" alt="Arkstaal inventory management" loading="lazy" />
+            </div>
+            <div class="portfolio-card-body">
+              <div class="pc-meta">Custom System · Inventory</div>
+              <h3 class="pc-name" data-i18n="arkstaal-inv-name">Inventory Management</h3>
+              <p class="pc-desc" data-i18n="arkstaal-inv-desc">Live stock levels, material specifications, and status tracking across all product lines.</p>
+              <span class="pc-link private" data-i18n="demo-request">Demo available on request</span>
+            </div>
+          </article>
+          <article class="portfolio-card">
+            <div class="portfolio-card-img-wrap">
+              <img src="images/arkstaal-klantenpaneel.png" alt="Arkstaal client portal" loading="lazy" />
+            </div>
+            <div class="portfolio-card-body">
+              <div class="pc-meta">Custom System · Client Portal</div>
+              <h3 class="pc-name" data-i18n="arkstaal-client-name">Client Portal</h3>
+              <p class="pc-desc" data-i18n="arkstaal-client-desc">Personal portal — individual quotes, orders, certificates, and stock checks per client.</p>
+              <span class="pc-link private" data-i18n="demo-request">Demo available on request</span>
+            </div>
+          </article>
+        </div>
+      </div>
+
+      <div class="bundle-gap"></div>
+
+      <!-- ══ OVERIGE WEBSITES ══════════════════════════════ -->
+      <div class="project-bundle reveal">
+        <div class="bundle-header">
+          <span class="bundle-client">Websites</span>
+          <div class="bundle-tag-row">
+            <span class="bundle-tag">NL</span>
+          </div>
+        </div>
+        <div class="portfolio-grid">
+
+          <article class="portfolio-card">
+            <div class="portfolio-card-img-wrap">
+              <img src="images/cleanservice-maas.png" alt="CleanService Maas website" loading="lazy" />
+            </div>
+            <div class="portfolio-card-body">
+              <div class="pc-meta" data-i18n="clean-meta">Website · Cleaning</div>
+              <h3 class="pc-name">CleanService Maas</h3>
+              <p class="pc-desc" data-i18n="clean-desc">Professional cleaning company — window washing, roof cleaning, and industrial cleaning for residential & commercial clients.</p>
+              <a href="https://cleanservicemaas.nl" target="_blank" rel="noopener" class="pc-link">cleanservicemaas.nl <span class="arrow">→</span></a>
+            </div>
+          </article>
+
+          <article class="portfolio-card">
+            <div class="portfolio-card-img-wrap">
+              <img src="images/stoffeerjecamper.png" alt="StoffeerJeCamper website" loading="lazy" />
+            </div>
+            <div class="portfolio-card-body">
+              <div class="pc-meta" data-i18n="camper-meta">Website · Interior</div>
+              <h3 class="pc-name">StoffeerJeCamper</h3>
+              <p class="pc-desc" data-i18n="camper-desc">Professional camper & caravan upholstery — from seats and curtains to complete interiors.</p>
+              <a href="https://stoffeerjecamper.nl" target="_blank" rel="noopener" class="pc-link">stoffeerjecamper.nl <span class="arrow">→</span></a>
+            </div>
+          </article>
+
+          <article class="portfolio-card">
+            <div class="portfolio-card-img-wrap">
+              <img src="images/novus-meubelstoffeerderij.png" alt="Novus Meubelstoffeerderij website" loading="lazy" />
+            </div>
+            <div class="portfolio-card-body">
+              <div class="pc-meta" data-i18n="novus-meta">Website · Furniture</div>
+              <h3 class="pc-name">Novus Meubelstoffeerderij</h3>
+              <p class="pc-desc" data-i18n="novus-desc">Premium furniture upholstery — expert reupholstering of classic and modern pieces.</p>
+              <a href="https://novusmeubelstoffeerderij.nl" target="_blank" rel="noopener" class="pc-link">novusmeubelstoffeerderij.nl <span class="arrow">→</span></a>
+            </div>
+          </article>
+
+          <article class="portfolio-card">
+            <div class="portfolio-card-img-wrap">
+              <img src="images/actief-dakonderhoud.png" alt="Actief Dakonderhoud website" loading="lazy" />
+            </div>
+            <div class="portfolio-card-body">
+              <div class="pc-meta" data-i18n="actief-meta">Website · Roofing</div>
+              <h3 class="pc-name">Actief Dakonderhoud</h3>
+              <p class="pc-desc" data-i18n="actief-desc">Roofing specialist for pitched roofs, flat roofs, and ridge renovations — professional and reliable.</p>
+              <a href="https://actiefdakonderhoud.nl" target="_blank" rel="noopener" class="pc-link">actiefdakonderhoud.nl <span class="arrow">→</span></a>
+            </div>
+          </article>
+
+          <article class="portfolio-card">
+            <div class="portfolio-card-img-wrap">
+              <img src="images/holland-lekdetectie.png" alt="Holland Lekdetectie Direct website" loading="lazy" />
+            </div>
+            <div class="portfolio-card-body">
+              <div class="pc-meta" data-i18n="holland-meta">Website · Leak Detection</div>
+              <h3 class="pc-name">Holland Lekdetectie Direct</h3>
+              <p class="pc-desc" data-i18n="holland-desc">Roof leak detection using advanced technology — on-site within 2 hours, no find = no charge.</p>
+              <a href="https://hollandlekdetectiedirect.nl" target="_blank" rel="noopener" class="pc-link">hollandlekdetectiedirect.nl <span class="arrow">→</span></a>
+            </div>
+          </article>
+
+          <article class="portfolio-card">
+            <div class="portfolio-card-img-wrap">
+              <img src="images/dakzorg-nederland.png" alt="DakZorg Nederland website" loading="lazy" />
+            </div>
+            <div class="portfolio-card-body">
+              <div class="pc-meta" data-i18n="dakzorg-meta">Website · Roofing</div>
+              <h3 class="pc-name">DakZorg Nederland</h3>
+              <p class="pc-desc" data-i18n="dakzorg-desc">Expert roofing with warranty — from repairs to full renovations across the Netherlands.</p>
+              <a href="https://dakzorgnederland.nl" target="_blank" rel="noopener" class="pc-link">dakzorgnederland.nl <span class="arrow">→</span></a>
+            </div>
+          </article>
+
+          <article class="portfolio-card">
+            <div class="portfolio-card-img-wrap">
+              <img src="images/aannemersbedrijf-emt.png" alt="Aannemersbedrijf EMT website" loading="lazy" />
+            </div>
+            <div class="portfolio-card-body">
+              <div class="pc-meta" data-i18n="emt-meta">Website · Construction</div>
+              <h3 class="pc-name">Aannemersbedrijf EMT</h3>
+              <p class="pc-desc" data-i18n="emt-desc">Trusted construction partner for renovations, refurbishments, and new builds — from small adjustments to full projects.</p>
+              <a href="https://aannemersbedrijf-emt.nl" target="_blank" rel="noopener" class="pc-link">aannemersbedrijf-emt.nl <span class="arrow">→</span></a>
+            </div>
+          </article>
+
+          <article class="portfolio-card">
+            <div class="portfolio-card-img-wrap">
+              <img src="images/stoffeerjeboot.png" alt="StoffeerJeBoot website" loading="lazy" />
+            </div>
+            <div class="portfolio-card-body">
+              <div class="pc-meta" data-i18n="boot-meta">Website · Marine</div>
+              <h3 class="pc-name">StoffeerJeBoot</h3>
+              <p class="pc-desc" data-i18n="boot-desc">Marine upholstery specialist — speedboats, yachts, and dinghies. Premium materials, expert craftsmanship.</p>
+              <a href="https://stoffeerjeboot.nl" target="_blank" rel="noopener" class="pc-link">stoffeerjeboot.nl <span class="arrow">→</span></a>
+            </div>
+          </article>
+
+          <article class="portfolio-card">
+            <div class="portfolio-card-img-wrap">
+              <img src="images/jr-interieur.png" alt="JR-Interieur website" loading="lazy" />
+            </div>
+            <div class="portfolio-card-body">
+              <div class="pc-meta" data-i18n="jr-meta">Website · Interior · B2B</div>
+              <h3 class="pc-name">JR-Interieur</h3>
+              <p class="pc-desc" data-i18n="jr-desc">Circular office furnishing for public and professional organisations — sustainable workspace redesign.</p>
+              <a href="https://jr-interieur.nl" target="_blank" rel="noopener" class="pc-link">jr-interieur.nl <span class="arrow">→</span></a>
+            </div>
+          </article>
+
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ─── SEE IT FIRST ──────────────────────────────────── -->
+  <section id="preview" class="section">
+    <div class="section-inner">
+      <div class="preview-card reveal">
+        <div class="preview-card-inner">
+          <h2 class="preview-headline" data-i18n="preview-headline">
+            You see the result first.<br><em>Then we talk.</em>
+          </h2>
+          <div class="steps-row">
+            <div class="step-card">
+              <div class="step-num">01 /</div>
+              <h3 class="step-title" data-i18n="step1-title">Tell me what you need</h3>
+              <p class="step-desc" data-i18n="step1-desc">One short conversation about your business and what you want to build.</p>
+            </div>
+            <div class="step-card">
+              <div class="step-num">02 /</div>
+              <h3 class="step-title" data-i18n="step2-title">I build a free preview</h3>
+              <p class="step-desc" data-i18n="step2-desc">You get a real, clickable preview of your project before any payment.</p>
+            </div>
+            <div class="step-card">
+              <div class="step-num">03 /</div>
+              <h3 class="step-title" data-i18n="step3-title">You decide</h3>
+              <p class="step-desc" data-i18n="step3-desc">If you love it, we move forward. If not, you owe nothing.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── SERVICES ──────────────────────────────────────── -->
+  <section id="services" class="section">
+    <div class="section-inner">
+      <div class="section-label reveal" data-i18n="nav-services">Services</div>
+      <h2 class="section-title reveal" data-i18n="services-title">Three things,<br><em>done well.</em></h2>
+      <div class="services-grid">
+        <article class="svc-card reveal">
+          <svg class="svc-icon" viewBox="0 0 40 40" fill="none" aria-hidden="true">
+            <rect x="3" y="8" width="34" height="24" rx="2" stroke="#C49A4A" stroke-width="1.3"/>
+            <line x1="3" y1="15" x2="37" y2="15" stroke="#C49A4A" stroke-width="1.3"/>
+            <circle cx="7.5" cy="11.5" r="1.2" fill="#C49A4A"/>
+            <circle cx="11.5" cy="11.5" r="1.2" fill="#C49A4A"/>
+            <rect x="9" y="20" width="22" height="1.5" rx="0.75" fill="#C49A4A" opacity="0.3"/>
+            <rect x="13" y="24" width="14" height="1.5" rx="0.75" fill="#C49A4A" opacity="0.2"/>
+          </svg>
+          <h3 class="svc-name">Websites</h3>
+          <p class="svc-desc" data-i18n="svc1-desc">Marketing sites, landing pages, and brand presences. Fast, custom-built, and designed to convert.</p>
+        </article>
+        <article class="svc-card reveal reveal-d1">
+          <svg class="svc-icon" viewBox="0 0 40 40" fill="none" aria-hidden="true">
+            <rect x="3" y="6" width="34" height="28" rx="2" stroke="#C49A4A" stroke-width="1.3"/>
+            <rect x="7" y="12" width="11" height="8" rx="1" stroke="#C49A4A" stroke-width="1.2" opacity="0.6"/>
+            <rect x="22" y="12" width="11" height="8" rx="1" stroke="#C49A4A" stroke-width="1.2" opacity="0.6"/>
+            <path d="M9 18 L12 14 L15 18" stroke="#C49A4A" stroke-width="1.1"/>
+            <path d="M24 19 L27 15 L30 17 L33 14" stroke="#C49A4A" stroke-width="1.1"/>
+            <rect x="7" y="24" width="26" height="3" rx="1" stroke="#C49A4A" stroke-width="1.2" opacity="0.3"/>
+          </svg>
+          <h3 class="svc-name">Systems &<br>Dashboards</h3>
+          <p class="svc-desc" data-i18n="svc2-desc">Custom web applications, internal tools, and dashboards built around your exact business logic.</p>
+        </article>
+        <article class="svc-card reveal reveal-d2">
+          <svg class="svc-icon" viewBox="0 0 40 40" fill="none" aria-hidden="true">
+            <circle cx="20" cy="20" r="15" stroke="#C49A4A" stroke-width="1.3" opacity="0.4"/>
+            <circle cx="20" cy="20" r="9"  stroke="#C49A4A" stroke-width="1.3" opacity="0.6"/>
+            <circle cx="20" cy="20" r="3"  fill="#C49A4A"/>
+            <line x1="20" y1="5"  x2="20" y2="11" stroke="#C49A4A" stroke-width="1.3"/>
+            <line x1="20" y1="29" x2="20" y2="35" stroke="#C49A4A" stroke-width="1.3"/>
+            <line x1="5"  y1="20" x2="11" y2="20" stroke="#C49A4A" stroke-width="1.3"/>
+            <line x1="29" y1="20" x2="35" y2="20" stroke="#C49A4A" stroke-width="1.3"/>
+          </svg>
+          <h3 class="svc-name">Marketing</h3>
+          <p class="svc-desc" data-i18n="svc3-desc">SEO, landing page optimisation, and targeted campaigns that drive real traffic and leads.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── CONTACT ───────────────────────────────────────── -->
+  <section id="contact" class="section">
+    <div class="section-inner">
+      <div class="contact-inner">
+        <h2 class="contact-ready reveal" data-i18n="contact-ready">Ready<em>?</em></h2>
+        <a href="mailto:hello@yoursystem.agency" class="contact-email reveal reveal-d1">hello@yoursystem.agency</a>
+        <div class="contact-cta-row reveal reveal-d2">
+          <a href="mailto:hello@yoursystem.agency" class="btn-fill" data-i18n="contact-cta1">SEND A MESSAGE</a>
+          <span class="cta-or" data-i18n="contact-or">or</span>
+          <a href="#contact" class="btn-ghost" data-i18n="contact-cta2">BOOK A FREE CALL</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer role="contentinfo">
+    <div class="foot-logo">YOURSYSTEM.AGENCY</div>
+    <ul class="foot-links" role="list">
+      <li><a href="#work" data-i18n="nav-work">Work</a></li>
+      <li><a href="#preview" data-i18n="nav-how">How It Works</a></li>
+      <li><a href="#services" data-i18n="nav-services">Services</a></li>
+      <li><a href="#contact" data-i18n="nav-contact">Contact</a></li>
+    </ul>
+    <p class="foot-copy">© 2026 YourSystem.Agency</p>
+  </footer>
+
+  <script>
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('past', window.scrollY > 60);
+    }, { passive: true });
+
+    const burger    = document.getElementById('burger');
+    const mobileNav = document.getElementById('mobileNav');
+    mobileNav.querySelectorAll('.mobile-link').forEach(link => {
+      link.addEventListener('click', () => {
+        mobileNav.classList.remove('open');
+        burger.setAttribute('aria-expanded', 'false');
+        document.body.style.overflow = '';
+      });
+    });
+    burger.addEventListener('click', () => {
+      const open = mobileNav.classList.toggle('open');
+      burger.setAttribute('aria-expanded', open);
+      document.body.style.overflow = open ? 'hidden' : '';
+    });
+
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); });
+    }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    // ── LANGUAGE SWITCHER ──────────────────────────────────
+    const t = {
+      en: {
+        'nav-work':            'Work',
+        'nav-how':             'How It Works',
+        'nav-services':        'Services',
+        'nav-contact':         'Contact',
+        'nav-cta':             'Get in Touch →',
+        'hero-h1':             'See exactly what you\'ll get —<br><em>before you pay a thing.</em>',
+        'hero-sub':            'Websites and systems built for your business.',
+        'hero-cta':            'SEE OUR WORK',
+        'work-title':          'Real projects,<br><em>real results.</em>',
+        'scorpio-feat-desc':   'Luxury car rental platform based in Dubai, UAE — full website with fleet overview, booking flow, and integrated management dashboard.',
+        'scorpio-fleet-meta':  'Website · Fleet Overview',
+        'scorpio-fleet-name':  'Scorpio — Fleet',
+        'scorpio-fleet-desc':  'Full fleet overview — filters, daily rates, availability, and direct booking option.',
+        'scorpio-dash-meta':   'Custom System · Dashboard',
+        'scorpio-dash-name':   'Scorpio — Management Panel',
+        'scorpio-dash-desc':   'Custom dashboard for fleet management, availability, pricing, and bookings — fully integrated with the website.',
+        'demo-request':        'Demo available on request',
+        'arkstaal-feat-desc':  'Public website for a Dutch stainless steel & aluminium supplier — full product catalogue, quote request, and bilingual. Includes custom systems for the owner and clients.',
+        'arkstaal-owner-name': 'Owner Panel',
+        'arkstaal-owner-desc': 'Custom dashboard for quotes, orders, and client management — replacing spreadsheets entirely.',
+        'arkstaal-inv-name':   'Inventory Management',
+        'arkstaal-inv-desc':   'Live stock levels, material specifications, and status tracking across all product lines.',
+        'arkstaal-client-name':'Client Portal',
+        'arkstaal-client-desc':'Personal portal — individual quotes, orders, certificates, and stock checks per client.',
+        'clean-meta':          'Website · Cleaning',
+        'clean-desc':          'Professional cleaning company — window washing, roof cleaning, and industrial cleaning for residential & commercial clients.',
+        'camper-meta':         'Website · Interior',
+        'camper-desc':         'Professional camper & caravan upholstery — from seats and curtains to complete interiors.',
+        'novus-meta':          'Website · Furniture',
+        'novus-desc':          'Premium furniture upholstery — expert reupholstering of classic and modern pieces.',
+        'actief-meta':         'Website · Roofing',
+        'actief-desc':         'Roofing specialist for pitched roofs, flat roofs, and ridge renovations — professional and reliable.',
+        'holland-meta':        'Website · Leak Detection',
+        'holland-desc':        'Roof leak detection using advanced technology — on-site within 2 hours, no find = no charge.',
+        'dakzorg-meta':        'Website · Roofing',
+        'dakzorg-desc':        'Expert roofing with warranty — from repairs to full renovations across the Netherlands.',
+        'emt-meta':            'Website · Construction',
+        'emt-desc':            'Trusted construction partner for renovations, refurbishments, and new builds — from small adjustments to full projects.',
+        'boot-meta':           'Website · Marine',
+        'boot-desc':           'Marine upholstery specialist — speedboats, yachts, and dinghies. Premium materials, expert craftsmanship.',
+        'jr-meta':             'Website · Interior · B2B',
+        'jr-desc':             'Circular office furnishing for public and professional organisations — sustainable workspace redesign.',
+        'preview-headline':    'You see the result first.<br><em>Then we talk.</em>',
+        'step1-title':         'Tell me what you need',
+        'step1-desc':          'One short conversation about your business and what you want to build.',
+        'step2-title':         'I build a free preview',
+        'step2-desc':          'You get a real, clickable preview of your project before any payment.',
+        'step3-title':         'You decide',
+        'step3-desc':          'If you love it, we move forward. If not, you owe nothing.',
+        'services-title':      'Three things,<br><em>done well.</em>',
+        'svc1-desc':           'Marketing sites, landing pages, and brand presences. Fast, custom-built, and designed to convert.',
+        'svc2-desc':           'Custom web applications, internal tools, and dashboards built around your exact business logic.',
+        'svc3-desc':           'SEO, landing page optimisation, and targeted campaigns that drive real traffic and leads.',
+        'contact-ready':       'Ready<em>?</em>',
+        'contact-cta1':        'SEND A MESSAGE',
+        'contact-or':          'or',
+        'contact-cta2':        'BOOK A FREE CALL',
+      },
+      nl: {
+        'nav-work':            'Werk',
+        'nav-how':             'Hoe Het Werkt',
+        'nav-services':        'Diensten',
+        'nav-contact':         'Contact',
+        'nav-cta':             'Neem contact op →',
+        'hero-h1':             'Zie precies wat je krijgt —<br><em>voordat je iets betaalt.</em>',
+        'hero-sub':            'Websites en systemen gebouwd voor jouw bedrijf.',
+        'hero-cta':            'BEKIJK ONS WERK',
+        'work-title':          'Echte projecten,<br><em>echte resultaten.</em>',
+        'scorpio-feat-desc':   'Luxe autoverhuurplatform gevestigd in Dubai, UAE — volledige website met wagenparkoverzicht, boekingsflow en geïntegreerd beheerpaneel.',
+        'scorpio-fleet-meta':  'Website · Wagenpark',
+        'scorpio-fleet-name':  'Scorpio — Wagenpark',
+        'scorpio-fleet-desc':  'Volledig wagenparkoverzicht — filters, dagtarieven, beschikbaarheid en directe boekingsoptie.',
+        'scorpio-dash-meta':   'Maatwerk Systeem · Dashboard',
+        'scorpio-dash-name':   'Scorpio — Beheerpaneel',
+        'scorpio-dash-desc':   'Maatwerk dashboard voor wagenparkbeheer, beschikbaarheid, prijzen en boekingen — volledig geïntegreerd met de website.',
+        'demo-request':        'Demo beschikbaar op aanvraag',
+        'arkstaal-feat-desc':  'Publieke website voor een Nederlandse RVS & aluminium leverancier — volledig productcatalogus, offerteaanvraag en tweetalig. Inclusief maatwerk systemen voor eigenaar en klanten.',
+        'arkstaal-owner-name': 'Eigenaarspanel',
+        'arkstaal-owner-desc': 'Maatwerk dashboard voor offertes, bestellingen en klantbeheer — ter vervanging van spreadsheets.',
+        'arkstaal-inv-name':   'Voorraadbeheer',
+        'arkstaal-inv-desc':   'Live voorraadniveaus, materiaalspecificaties en statusbeheer over alle productlijnen.',
+        'arkstaal-client-name':'Klantenpaneel',
+        'arkstaal-client-desc':'Persoonlijk portaal — eigen offertes, bestellingen, certificaten en voorraadcheck per klant.',
+        'clean-meta':          'Website · Schoonmaak',
+        'clean-desc':          'Professioneel schoonmaakbedrijf — glaswassing, dakreiniging en industriële reiniging voor particulieren & bedrijven.',
+        'camper-meta':         'Website · Interieur',
+        'camper-desc':         'Professionele camper & caravan stoffering — van bankstellen en gordijnen tot complete interieurs.',
+        'novus-meta':          'Website · Meubels',
+        'novus-desc':          'Premium meubelstoffeerderij — ambachtelijk herstofferen van klassieke en moderne meubels.',
+        'actief-meta':         'Website · Dakwerk',
+        'actief-desc':         'Dakspecialist voor schuine daken, platte daken en nokrenovatie — vakkundig en betrouwbaar in de regio.',
+        'holland-meta':        'Website · Lekdetectie',
+        'holland-desc':        'Daklekkages opsporen met geavanceerde technologie — binnen 2 uur ter plaatse, geen vind = geen kosten.',
+        'dakzorg-meta':        'Website · Dakwerk',
+        'dakzorg-desc':        'Vakkundig dakwerk met garantie — van dakreparatie tot complete renovatie voor heel Nederland.',
+        'emt-meta':            'Website · Bouw',
+        'emt-desc':            'Betrouwbare bouwpartner voor verbouw, renovatie en nieuwbouw — van kleine aanpassingen tot complete projecten.',
+        'boot-meta':           'Website · Marine',
+        'boot-desc':           'Specialist in boot herstoffering — speedboten, jachten en sloepen. Premium materialen, vakkundige uitvoering.',
+        'jr-meta':             'Website · Interieur · B2B',
+        'jr-desc':             'Circulaire kantoorinrichting voor publieke en professionele organisaties — duurzaam herinrichten van werkruimtes.',
+        'preview-headline':    'Jij ziet het resultaat eerst.<br><em>Dan praten we.</em>',
+        'step1-title':         'Vertel wat je nodig hebt',
+        'step1-desc':          'Één kort gesprek over jouw bedrijf en wat je wilt bouwen.',
+        'step2-title':         'Ik bouw een gratis preview',
+        'step2-desc':          'Je krijgt een echte, klikbare preview van je project — nog vóór betaling.',
+        'step3-title':         'Jij beslist',
+        'step3-desc':          'Ben je enthousiast, dan gaan we verder. Zo niet, dan ben je niets verschuldigd.',
+        'services-title':      'Drie dingen,<br><em>goed gedaan.</em>',
+        'svc1-desc':           'Marketingsites, landingspagina\'s en merkaanwezigheid. Snel, op maat gebouwd en gericht op conversie.',
+        'svc2-desc':           'Maatwerkwebapplicaties, interne tools en dashboards — gebouwd rondom jouw exacte bedrijfslogica.',
+        'svc3-desc':           'SEO, landingspagina-optimalisatie en gerichte campagnes die echte bezoekers en leads opleveren.',
+        'contact-ready':       'Klaar<em>?</em>',
+        'contact-cta1':        'STUUR EEN BERICHT',
+        'contact-or':          'of',
+        'contact-cta2':        'BOEK EEN GRATIS GESPREK',
+      }
+    };
+
+    function setLang(lang) {
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.dataset.i18n;
+        if (t[lang][key] !== undefined) el.innerHTML = t[lang][key];
+      });
+      document.documentElement.lang = lang;
+      localStorage.setItem('ys-lang', lang);
+      ['en','nl'].forEach(l => {
+        document.getElementById('btn-' + l)?.classList.toggle('active', l === lang);
+        document.getElementById('mbtn-' + l)?.classList.toggle('active', l === lang);
+      });
+    }
+
+    // Apply saved or browser language on load
+    (function() {
+      const saved = localStorage.getItem('ys-lang');
+      const browser = navigator.language?.startsWith('nl') ? 'nl' : 'en';
+      setLang(saved || browser);
+    })();
+
+    // ── ZOOM LENS ──────────────────────────────────────────
+    (function() {
+      const ZOOM    = 2.8;
+      const LENS_PX = 320;
+
+      function attachZoom(wrap, img, chromeH) {
+        const lens = document.createElement('div');
+        lens.className = 'zoom-lens';
+        wrap.appendChild(lens);
+
+        let active = false;
+
+        wrap.addEventListener('mouseenter', () => {
+          if (!img.complete || !img.naturalWidth) return;
+          lens.style.backgroundImage = `url(${img.src})`;
+          lens.style.display = 'block';
+          active = true;
+        });
+
+        wrap.addEventListener('mouseleave', () => {
+          lens.style.display = 'none';
+          active = false;
+        });
+
+        wrap.addEventListener('mousemove', (e) => {
+          if (!active) return;
+          const rect = wrap.getBoundingClientRect();
+          const x = e.clientX - rect.left;
+          const y = e.clientY - rect.top;
+
+          // Hide lens when hovering over chrome bar
+          if (y < chromeH) { lens.style.display = 'none'; return; }
+          lens.style.display = 'block';
+
+          lens.style.left = x + 'px';
+          lens.style.top  = y + 'px';
+
+          const imgH = rect.height - chromeH;
+          const bgW  = rect.width * ZOOM;
+          const bgH  = imgH * ZOOM;
+          const bgX  = -(x / rect.width * bgW - LENS_PX / 2);
+          const bgY  = -((y - chromeH) / imgH * bgH - LENS_PX / 2);
+
+          lens.style.backgroundSize     = `${bgW}px ${bgH}px`;
+          lens.style.backgroundPosition = `${bgX}px ${bgY}px`;
+        });
+      }
+
+      document.querySelectorAll('.portfolio-card-img-wrap').forEach(wrap => {
+        const img    = wrap.querySelector('img');
+        const chrome = wrap.classList.contains('no-chrome') ? 0 : 34;
+        if (img) attachZoom(wrap, img, chrome);
+      });
+
+      document.querySelectorAll('.bundle-featured .feat-visual').forEach(wrap => {
+        const img = wrap.querySelector('img');
+        if (img) attachZoom(wrap, img, 0);
+      });
+    })();
+  </script>
+</body>
+</html>
